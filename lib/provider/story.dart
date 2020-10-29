@@ -6,7 +6,7 @@ class Story with ChangeNotifier {
   final String id;
   final String title;
   final Color color;
-  final dateTime;
+  final String dateTime;
   final String emoji;
   final String storyNote;
   bool isStarred;

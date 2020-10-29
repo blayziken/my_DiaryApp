@@ -57,6 +57,9 @@ class Stories with ChangeNotifier {
             storyNote: storyData['storyNote'],
             emoji: storyData['emoji'],
             isStarred: storyData['isStarred'],
+            dateTime: storyData['dateTime'],
+
+//            storyData['dateTime'],
           ),
         );
       });
@@ -77,7 +80,7 @@ class Stories with ChangeNotifier {
           'storyNote': story.storyNote,
           'emoji': story.emoji,
           'isStarred': story.isStarred,
-          'dateTime': story.dateTime,
+          'dateTime': DateTime.now().toIso8601String(),
         }),
       );
       final newStory = Story(
@@ -86,7 +89,7 @@ class Stories with ChangeNotifier {
         storyNote: story.storyNote,
         emoji: story.emoji,
 //        dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-        dateTime: DateTime.now().toIso8601String(),
+//        dateTime: DateTime.now().toString(),
       );
       _items.add(newStory);
       notifyListeners();

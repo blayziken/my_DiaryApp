@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/provider/story_provider.dart';
 import 'package:my_DiaryApp/screens/homeScreen.dart';
 import 'package:provider/provider.dart';
-import '../provider/story.dart';
+import 'package:intl/intl.dart';
 
 class StoryDetailScreen extends StatefulWidget {
 //  final String title;
@@ -32,6 +32,11 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     ).findById(storyId);
 //    final story = Provider.of<Story>(context);
 //    final providerStories = Provider.of<Stories>(context);
+
+    var parsedDate = DateTime.parse(loadedStory.dateTime);
+//    var parsedDate2 = DateFormat('d/M/yyyy').parse(loadedStory.dateTime);
+    var parsedDateToDateFormat = DateFormat('dd/MM/yyyy').format(parsedDate);
+//        dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()),
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(242, 229, 220, 10.0),
@@ -155,7 +160,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
               Container(
 //                margin: EdgeInsets.only(left: 140.0),
                 child: Text(
-                  'Created: ${loadedStory.dateTime}',
+                  'Created: $parsedDateToDateFormat',
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -173,6 +178,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
                     color: Colors.orange[600],
                   ),
                   onPressed: () {
+//                    print(dateA);
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
