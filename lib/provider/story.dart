@@ -12,7 +12,7 @@ class Story with ChangeNotifier {
   bool isStarred;
 
   Story({
-    @required this.id,
+    this.id,
     @required this.title,
     this.color,
     this.dateTime,
@@ -26,11 +26,12 @@ class Story with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleStarredStatus() async {
+  Future<void> toggleStarredStatus(String token) async {
     final oldStatus = isStarred;
     isStarred = !isStarred;
     notifyListeners();
-    final url = 'https://my-diary-f6e0c.firebaseio.com/stories/$id.json';
+    final url =
+        'https://my-diary-f6e0c.firebaseio.com/stories/$id.json?auth=$token';
     try {
       final response = await http.patch(
         url,

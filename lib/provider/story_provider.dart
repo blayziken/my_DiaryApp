@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'story.dart';
-import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import '../model/http_exception.dart';
 
@@ -32,6 +31,10 @@ class Stories with ChangeNotifier {
 
   var _showFavoritesOnly = false;
 
+  final String authToken;
+
+  Stories(this.authToken, this._items);
+
   List<Story> get items {
     return [..._items];
   }
@@ -41,11 +44,13 @@ class Stories with ChangeNotifier {
   }
 
   Future<void> fetchStories() async {
-    const url = 'https://my-diary-f6e0c.firebaseio.com/stories.json';
+    final url =
+        'https://my-diary-f6e0c.firebaseio.com/stories.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Story> loadedStories = [];
+      print(json.decode(response.body));
       extractedData.forEach((storyId, storyData) {
         //storyId = Key
         //storyData = Value
@@ -71,7 +76,8 @@ class Stories with ChangeNotifier {
   }
 
   Future<void> addStory(Story story) async {
-    const url = 'https://my-diary-f6e0c.firebaseio.com/stories.json';
+    final url =
+        'https://my-diary-f6e0c.firebaseio.com/stories.json?auth=$authToken';
     try {
       final response = await http.post(
         url,
@@ -88,8 +94,8 @@ class Stories with ChangeNotifier {
         title: story.title,
         storyNote: story.storyNote,
         emoji: story.emoji,
-//        dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-//        dateTime: DateTime.now().toString(),
+//        dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()), //didn't use
+//        dateTime: DateTime.now().toString(), //didn't use
       );
       _items.add(newStory);
       notifyListeners();
@@ -104,7 +110,8 @@ class Stories with ChangeNotifier {
   }
 
   Future<void> deleteStory(String id) async {
-    final url = 'https://my-diary-f6e0c.firebaseio.com/stories/$id.json';
+    final url =
+        'https://my-diary-f6e0c.firebaseio.com/stories/$id.json?auth=$authToken';
     final existingStoryIndex = _items.indexWhere((element) => element.id == id);
     var existingStory = _items[existingStoryIndex];
 
