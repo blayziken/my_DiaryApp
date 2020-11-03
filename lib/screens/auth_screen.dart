@@ -1,13 +1,17 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import '../provider/auth.dart';
+import '../model/http_exception.dart';
 
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
-//  static const routeName = '/auth';
-
+  static const routeName = '/auth';
+  static final loginOrSignup = 'Login!😃';
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+
     // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
     // transformConfig.translate(-10.0);
     return Scaffold(
@@ -18,8 +22,9 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+//                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+                  Colors.deepOrange.withOpacity(0.9),
+                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.8),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -27,6 +32,7 @@ class AuthScreen extends StatelessWidget {
               ),
             ),
           ),
+//
           SingleChildScrollView(
             child: Container(
               height: deviceSize.height,
@@ -35,21 +41,20 @@ class AuthScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Flexible(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      child: Text(
-                        'MyShop',
-                        style: TextStyle(
-                          color:
-                              Theme.of(context).accentTextTheme.headline6.color,
-                          fontSize: 50,
-                          fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ),
+//                  Flexible(
+//                    child: Container(
+//                      margin: EdgeInsets.only(top: 70.0),
+//                      child: Text(
+//                        'Login!😃',
+//                        style: TextStyle(
+//                          color: Theme.of(context).accentTextTheme.title.color,
+//                          fontSize: 40,
+//                          fontFamily: 'Anton',
+//                          fontWeight: FontWeight.normal,
+//                        ),
+//                      ),
+//                    ),
+//                  ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
@@ -83,7 +88,25 @@ class _AuthCardState extends State<AuthCard> {
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
-  void _submit() {
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('An Error Occurred'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> _submit() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
       return;
@@ -92,11 +115,39 @@ class _AuthCardState extends State<AuthCard> {
     setState(() {
       _isLoading = true;
     });
-    if (_authMode == AuthMode.Login) {
-      // Log user in
-    } else {
-      // Sign user up
+    try {
+      if (_authMode == AuthMode.Login) {
+        // Log user in
+        await Provider.of<Auth>(context, listen: false).login(
+          _authData['email'],
+          _authData['password'],
+        );
+      } else {
+        // Sign user up
+        await Provider.of<Auth>(context, listen: false).signup(
+          _authData['email'],
+          _authData['password'],
+        );
+      }
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASS')) {
+        errorMessage = 'This password is too weeak';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage = 'Could not authenticate you. Please try again later';
+      _showErrorDialog(errorMessage);
     }
+
     setState(() {
       _isLoading = false;
     });
@@ -118,14 +169,20 @@ class _AuthCardState extends State<AuthCard> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+      color: Colors.transparent,
+      shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
+//        side: BorderSide(
+//          color: Colors.deepOrange,
+//        ),
       ),
       elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.Signup ? 320 : 260,
+        margin: EdgeInsets.only(top: 80.0),
+        height: _authMode == AuthMode.Signup ? 320 : 300,
         constraints:
-            BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
+            BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 390 : 260),
         width: deviceSize.width * 0.75,
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -134,7 +191,21 @@ class _AuthCardState extends State<AuthCard> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'E-Mail'),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    labelText: 'E-Mail',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    fillColor: Colors.greenAccent,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+//                    border: OutlineInputBorder(
+//                      borderSide: BorderSide(
+//                        color: Colors.white,
+//                        width: 12.0,
+//                      ),
+//                    ),
+                  ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value.isEmpty || !value.contains('@')) {
@@ -146,7 +217,12 @@ class _AuthCardState extends State<AuthCard> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
@@ -161,7 +237,12 @@ class _AuthCardState extends State<AuthCard> {
                 if (_authMode == AuthMode.Signup)
                   TextFormField(
                     enabled: _authMode == AuthMode.Signup,
-                    decoration: InputDecoration(labelText: 'Confirm Password'),
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
                         ? (value) {
@@ -172,7 +253,7 @@ class _AuthCardState extends State<AuthCard> {
                         : null,
                   ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 if (_isLoading)
                   CircularProgressIndicator()

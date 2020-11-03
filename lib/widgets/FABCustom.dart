@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/screens/starred.dart';
-import '../tests/badge.dart';
 import '../screens/AddStory.dart';
 
 class CustomFAB extends StatefulWidget {
@@ -178,12 +177,12 @@ class _CustomFABState extends State<CustomFAB>
                       height: 50,
                       width: 50,
                       onClick: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Badge(),
-                          ),
-                        );
+//                        Navigator.push(
+//                          context,
+//                          MaterialPageRoute(
+//                            builder: (context) => Badge(),
+//                          ),
+//                        );
                       },
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'package:my_DiaryApp/provider/story_provider.dart';
 import 'package:my_DiaryApp/screens/homeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import '../provider/auth.dart';
 
 class StoryDetailScreen extends StatefulWidget {
 //  final String title;
@@ -32,6 +33,8 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     ).findById(storyId);
 //    final story = Provider.of<Story>(context);
 //    final providerStories = Provider.of<Stories>(context);
+
+    final authData = Provider.of<Auth>(context, listen: false);
 
     var parsedDate = DateTime.parse(loadedStory.dateTime);
 //    var parsedDate2 = DateFormat('d/M/yyyy').parse(loadedStory.dateTime);
@@ -73,7 +76,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
 //                      Navigator.pop(context);
 
                       setState(() {
-                        loadedStory.toggleStarredStatus();
+                        loadedStory.toggleStarredStatus(authData.token);
                       });
 
 //                      if (loadedStory.isStarred = true) {
@@ -122,8 +125,12 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
                 ],
               ),
             ),
+//            Container(
+//              height: 200.0,
+//              child: Image.asset('images/backgroundcropped.jpg'),
+//            ),
             Container(
-              margin: EdgeInsets.only(top: 80.0, left: 40.0),
+              margin: EdgeInsets.only(top: 75.0, left: 40.0),
               child: Text(
                 loadedStory.title,
                 style: TextStyle(
@@ -241,3 +248,24 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     );
   }
 }
+
+//class ShapePainter extends CustomPainter {
+//  @override
+//  void paint(Canvas canvas, Size size) {
+//    final left = 0.0;
+//    final top = 220.0;
+//    final right = 400.0;
+//    final bottom = 900.0;
+//    final rect = Rect.fromLTRB(left, top, right, bottom);
+//    final paint = Paint()
+//      ..color = Colors.black
+//      ..style = PaintingStyle.stroke
+//      ..strokeWidth = 4;
+//    canvas.drawRect(rect, paint);
+//  }
+//
+//  @override
+//  bool shouldRepaint(CustomPainter oldDelegate) {
+//    return false;
+//  }
+//}

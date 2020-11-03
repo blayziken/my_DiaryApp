@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/provider/story_provider.dart';
 import '../widgets/stories_list.dart';
-import '../screens/starred.dart';
 import 'package:provider/provider.dart';
 import '../widgets/FABCustom.dart';
 import '../provider/story_provider.dart';
@@ -24,21 +23,15 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isLoading = false;
 
   @override
-  void initState() {
-//    Future.delayed(Duration.zero).then((_) {
-//      Provider.of<Stories>(context, listen: false).fetchStories();
-//    });
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
         _isLoading = true;
       });
       Provider.of<Stories>(context).fetchStories().then((_) {
-        _isLoading = false;
+        setState(() {
+          _isLoading = false;
+        });
       });
     }
     _isInit = false;
