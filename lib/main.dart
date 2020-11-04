@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/provider/story.dart';
+import 'package:my_DiaryApp/screens/welcome/welcomeScreen.dart';
 
 import 'package:provider/provider.dart';
 import './provider/story_provider.dart';
@@ -7,6 +8,7 @@ import './provider/story_provider.dart';
 import 'screens/homeScreen.dart';
 import './screens/StoryDetail.dart';
 import './screens/auth_screen.dart';
+import './screens/starred.dart';
 import './provider/auth.dart';
 
 void main() {
@@ -43,8 +45,10 @@ class MyApp extends StatelessWidget {
           home: auth.isAuth ? HomeScreen() : AuthScreen(),
           routes: {
             StoryDetailScreen.routeName: (context) => StoryDetailScreen(),
+            StarredStories.routeName: (context) => StarredStories(),
             HomeScreen.routeName: (context) => HomeScreen(),
             AuthScreen.routeName: (context) => AuthScreen(),
+            WelcomeScreen.routeName: (context) => WelcomeScreen(),
           },
         ),
       ),

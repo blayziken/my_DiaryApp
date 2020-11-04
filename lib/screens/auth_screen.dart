@@ -1,3 +1,4 @@
+import 'package:my_DiaryApp/screens/homeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../provider/auth.dart';
@@ -122,6 +123,7 @@ class _AuthCardState extends State<AuthCard> {
           _authData['email'],
           _authData['password'],
         );
+//        Navigator.pushNamed(context, HomeScreen.routeName);
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false).signup(
