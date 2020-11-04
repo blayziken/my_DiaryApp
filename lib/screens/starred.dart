@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../provider/story_provider.dart';
 
 class StarredStories extends StatefulWidget {
+  static const routeName = '/starred-screen';
+
   @override
   _StarredStoriesState createState() => _StarredStoriesState();
 }

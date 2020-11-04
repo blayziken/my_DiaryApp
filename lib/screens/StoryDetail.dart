@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/provider/story_provider.dart';
 import 'package:my_DiaryApp/screens/homeScreen.dart';
+import 'package:my_DiaryApp/screens/starred.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../provider/auth.dart';
@@ -81,6 +82,8 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
                           authData.userId,
                         );
                       });
+
+                      Navigator.of(context).pushNamed(HomeScreen.routeName);
 
 //                      if (loadedStory.isStarred = true) {
 //                        showDialog(

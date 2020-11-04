@@ -4,6 +4,8 @@ import 'package:my_DiaryApp/screens/auth_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static const routeName = '/welcome-screen';
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
