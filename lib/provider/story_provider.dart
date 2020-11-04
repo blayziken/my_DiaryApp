@@ -46,7 +46,7 @@ class Stories with ChangeNotifier {
 
   Future<void> fetchStories() async {
     var url =
-        'https://my-diary-f6e0c.firebaseio.com/stories.json?auth=$authToken';
+        'https://my-diary-f6e0c.firebaseio.com/stories.json?auth=$authToken&orderBy="creatorId"&equalTo="$userId"';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -96,6 +96,7 @@ class Stories with ChangeNotifier {
           'storyNote': story.storyNote,
           'emoji': story.emoji,
           'dateTime': DateTime.now().toIso8601String(),
+          'creatorId': userId,
         }),
       );
       final newStory = Story(
