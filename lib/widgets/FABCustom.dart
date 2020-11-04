@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_DiaryApp/screens/starred.dart';
 import '../screens/AddStory.dart';
+import '../provider/auth.dart';
+import 'package:provider/provider.dart';
 
 class CustomFAB extends StatefulWidget {
   @override
@@ -177,12 +179,7 @@ class _CustomFABState extends State<CustomFAB>
                       height: 50,
                       width: 50,
                       onClick: () {
-//                        Navigator.push(
-//                          context,
-//                          MaterialPageRoute(
-//                            builder: (context) => Badge(),
-//                          ),
-//                        );
+                        Provider.of<Auth>(context, listen: false).logout();
                       },
                     ),
                   ),
