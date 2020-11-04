@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Auth, Stories>(
           update: (context, auth, previousStories) => Stories(
             auth.token,
+            auth.userId,
             previousStories == null ? [] : previousStories.items,
           ),
         ),

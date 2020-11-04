@@ -26,18 +26,18 @@ class Story with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleStarredStatus(String token) async {
+  Future<void> toggleStarredStatus(String token, String userId) async {
     final oldStatus = isStarred;
     isStarred = !isStarred;
     notifyListeners();
     final url =
-        'https://my-diary-f6e0c.firebaseio.com/stories/$id.json?auth=$token';
+        'https://my-diary-f6e0c.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
     try {
-      final response = await http.patch(
+      final response = await http.put(
         url,
-        body: json.encode({
-          'isStarred': isStarred,
-        }),
+        body: json.encode(
+          isStarred,
+        ),
       );
       if (response.statusCode >= 400) {
         _setStarValue(oldStatus);

@@ -32,8 +32,9 @@ class Stories with ChangeNotifier {
   var _showFavoritesOnly = false;
 
   final String authToken;
+  final String userId;
 
-  Stories(this.authToken, this._items);
+  Stories(this.authToken, this.userId, this._items);
 
   List<Story> get items {
     return [..._items];
@@ -44,24 +45,33 @@ class Stories with ChangeNotifier {
   }
 
   Future<void> fetchStories() async {
-    final url =
+    var url =
         'https://my-diary-f6e0c.firebaseio.com/stories.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
+
+      url =
+          'https://my-diary-f6e0c.firebaseio.com/userFavorites/$userId/.json?auth=$authToken';
+
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
+
       final List<Story> loadedStories = [];
-      print(json.decode(response.body));
+      print('------------------------');
+      print(extractedData);
       extractedData.forEach((storyId, storyData) {
-        //storyId = Key
-        //storyData = Value
-//        loadedStories.insert(0, element)
         loadedStories.add(
           Story(
             id: storyId,
             title: storyData['title'],
             storyNote: storyData['storyNote'],
             emoji: storyData['emoji'],
-            isStarred: storyData['isStarred'],
+            isStarred:
+                favoriteData == null ? false : favoriteData[storyId] ?? false,
             dateTime: storyData['dateTime'],
 
 //            storyData['dateTime'],
@@ -85,7 +95,6 @@ class Stories with ChangeNotifier {
           'title': story.title,
           'storyNote': story.storyNote,
           'emoji': story.emoji,
-          'isStarred': story.isStarred,
           'dateTime': DateTime.now().toIso8601String(),
         }),
       );

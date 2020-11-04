@@ -76,7 +76,10 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
 //                      Navigator.pop(context);
 
                       setState(() {
-                        loadedStory.toggleStarredStatus(authData.token);
+                        loadedStory.toggleStarredStatus(
+                          authData.token,
+                          authData.userId,
+                        );
                       });
 
 //                      if (loadedStory.isStarred = true) {
