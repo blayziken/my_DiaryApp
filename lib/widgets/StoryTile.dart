@@ -4,6 +4,8 @@ import '../screens/StoryDetail.dart';
 import 'package:provider/provider.dart';
 import '../provider/story.dart';
 import '../provider/story_provider.dart';
+import 'dart:math';
+import '../tools/colorList.dart';
 
 class StoryTile extends StatelessWidget {
   @override
@@ -16,6 +18,14 @@ class StoryTile extends StatelessWidget {
       storyNoteClipped1 = story.storyNote;
     } else {
       storyNoteClipped1 = story.storyNote.substring(0, 20) + '....';
+    }
+
+    Random random = Random();
+    int colorIndex = 0;
+
+    Color changeColorIndex() {
+      colorIndex = random.nextInt(colorList.length);
+      return colorList[colorIndex];
     }
 
     return Padding(
@@ -32,7 +42,7 @@ class StoryTile extends StatelessWidget {
             Container(
               child: CircleAvatar(
                 radius: 9.0,
-//                backgroundColor: color,
+                backgroundColor: changeColorIndex(),
               ),
             ),
             SizedBox(

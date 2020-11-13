@@ -37,7 +37,8 @@ class Stories with ChangeNotifier {
   Stories(this.authToken, this.userId, this._items);
 
   List<Story> get items {
-    return [..._items];
+    return [..._items.reversed];
+//    _items.sort()
   }
 
   List<Story> get favoriteItems {
@@ -150,5 +151,9 @@ class Stories with ChangeNotifier {
 
   int getItemsLength() {
     return _items.length;
+  }
+
+  void printItems() {
+    print(_items);
   }
 }

@@ -10,6 +10,7 @@ import './screens/StoryDetail.dart';
 import './screens/auth_screen.dart';
 import './screens/starred.dart';
 import './provider/auth.dart';
+import './tests/ta.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: auth.isAuth ? HomeScreen() : AuthScreen(),
+//          home: AddStory2(),
           routes: {
             StoryDetailScreen.routeName: (context) => StoryDetailScreen(),
             StarredStories.routeName: (context) => StarredStories(),

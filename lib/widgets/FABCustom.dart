@@ -3,6 +3,7 @@ import 'package:my_DiaryApp/screens/starred.dart';
 import '../screens/AddStory.dart';
 import '../provider/auth.dart';
 import 'package:provider/provider.dart';
+import '../provider/story_provider.dart';
 
 class CustomFAB extends StatefulWidget {
   @override
@@ -179,7 +180,9 @@ class _CustomFABState extends State<CustomFAB>
                       height: 50,
                       width: 50,
                       onClick: () {
-                        Provider.of<Auth>(context, listen: false).logout();
+//                        Provider.of<Auth>(context, listen: false).logout();
+                        Provider.of<Stories>(context, listen: false)
+                            .printItems();
                       },
                     ),
                   ),

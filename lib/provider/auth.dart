@@ -88,6 +88,27 @@ class Auth with ChangeNotifier {
     final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
+
+//  Future<bool> tryAutoLogin() async {
+//    final prefs = await SharedPreferences.getInstance();
+//    if (!prefs.containsKey('userData')) {
+//      return false;
+//    }
+//    final extractedUserData =
+//        json.decode(prefs.getString('userData')) as Map<String, Object>;
+//    final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
+//
+//    if (expiryDate.isBefore(DateTime.now())) {
+//      return false;
+//    }
+//    _token = extractedUserData['token'];
+//    _userId = extractedUserData['userId'];
+//    _expiryDate = expiryDate;
+//    notifyListeners();
+//    _autoLogout();
+//    return true;
+//  }
+
 }
 
 //test@test.com
