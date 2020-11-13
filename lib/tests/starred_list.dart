@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'StarredTile.dart';
-import '../lib/provider/story_provider.dart';
+import '../tests/StarredTile.dart';
+import '../provider/story_provider.dart';
 
 class StarredList extends StatelessWidget {
   final bool showFavs;

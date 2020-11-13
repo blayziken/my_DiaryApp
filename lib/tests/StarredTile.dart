@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 //import '../lib/screens/StarredDetail.dart';
 import 'StarredDetail.dart';
 import 'package:provider/provider.dart';
-import '../lib/provider/story.dart';
-import '../lib/provider/story_provider.dart';
+import '../provider/story.dart';
+import '../provider/story_provider.dart';
 
 class StarredTile extends StatelessWidget {
   @override

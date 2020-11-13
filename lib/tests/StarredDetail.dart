@@ -3,7 +3,7 @@ import 'package:my_DiaryApp/provider/story_provider.dart';
 import 'package:my_DiaryApp/screens/homeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../lib/provider/auth.dart';
+import '../provider/auth.dart';
 
 class StarredDetailScreen extends StatefulWidget {
 //  final String title;
