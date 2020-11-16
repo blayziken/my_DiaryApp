@@ -51,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
       storyOrStories = 'Stories';
     }
 
+//    if (Provider.of<Stories>(context).getItemsLength() < 1 ) {
+//      storyOrStories = 'Stories';
+//    }
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -113,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // TITLE, DATE AND LINE
             Positioned(
-              top: 340,
+              top: 320,
               left: 65,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,6 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'My Diary',
                     style: TextStyle(
+                      fontFamily: 'Apple Juiced',
+//                      fontFamily: 'Ebbing',
+                      letterSpacing: 2,
                       color: Colors.black,
                       fontSize: 40.0,
                       fontWeight: FontWeight.bold,
@@ -131,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'You have ${Provider.of<Stories>(context).getItemsLength()} $storyOrStories',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 15.0,
+                      fontSize: 17.0,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
                     ),
@@ -159,19 +166,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // NOTES CARD
             Positioned(
-              top: 430,
-              left: 7,
-              height: 400,
-              width: 420,
+                top: 400,
+                left: 7,
+                height: 400,
+                width: 420,
 //              child: StoryList(),
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.orange,
-                      ),
-                    )
-                  : StoriesList(_showOnlyFavorites),
-            ),
+                child: _isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.orange,
+                        ),
+                      )
+                    : StoriesList(_showOnlyFavorites)
+
+//                  ??
+//                      Center(
+//                        child: CircularProgressIndicator(),
+//                      ),
+                ),
           ],
         ),
       ),

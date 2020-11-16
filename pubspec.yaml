@@ -17,6 +17,7 @@ dependencies:
   http: ^0.12.2
   modal_progress_hud: ^0.1.3
   animated_text_kit: ^1.3.0
+  shared_preferences: ^0.5.12+4
 
 
 
@@ -35,3 +36,52 @@ flutter:
 
   assets:
     - images/
+
+  fonts:
+  - family: Apple Juiced
+    fonts:
+    - asset: fonts/applejuiced.ttf
+
+  - family: Billbrd
+    fonts:
+    - asset: fonts/billbrd.ttf
+
+  - family: Ebbing
+    fonts:
+    - asset: fonts/Ebbing.ttf
+
+  - family: Tw Cent
+    fonts:
+    - asset: fonts/TwCent.ttf
+
+  - family: Caveat
+    fonts:
+    - asset: fonts/Caveat-Regular.ttf
+
+  - family: Great Vibes
+    fonts:
+    - asset: fonts/GreatVibes-Regular.ttf
+
+  - family: Pacifico
+    fonts:
+    - asset: fonts/Pacifico-Regular.ttf
+
+  - family: Satisfy
+    fonts:
+    - asset: fonts/Satisfy-Regular.ttf
+
+  - family: Yellowtail
+    fonts:
+    - asset: fonts/Yellowtail-Regular.ttf
+
+  - family: Dosis
+    fonts:
+    - asset: fonts/Dosis-VariableFont_wght.ttf
+
+  - family: Kosugi Maru
+    fonts:
+    - asset: fonts/KosugiMaru-Regular.ttf
+
+  - family: Source Sans Pro
+    fonts:
+    - asset: fonts/SourceSansPro-SemiBoldItalic.ttf

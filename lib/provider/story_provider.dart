@@ -12,21 +12,7 @@ class Stories with ChangeNotifier {
 //      storyNote: '1111111111111111111111111111111',
 //      dateTime: DateTime.now(),
 //      emoji: '😁',
-//    ),
-//    Story(
-//      id: 'S2',
-//      title: 'Second Story',
-//      storyNote: '222222222222222222222222',
-//      dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-//      emoji: '🙂',
-//    ),
-//    Story(
-//      id: 'S3',
-//      title: 'Third Story',
-//      storyNote: '333333333333333333333333',
-//      dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-//      emoji: '😋',
-//    ),
+//    )
   ];
 
   var _showFavoritesOnly = false;
@@ -151,9 +137,5 @@ class Stories with ChangeNotifier {
 
   int getItemsLength() {
     return _items.length;
-  }
-
-  void printItems() {
-    print(_items);
   }
 }

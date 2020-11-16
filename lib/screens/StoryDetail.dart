@@ -84,48 +84,6 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
                       });
 
                       Navigator.of(context).pushNamed(HomeScreen.routeName);
-
-//                      if (loadedStory.isStarred = true) {
-//                        showDialog(
-//                          context: context,
-//                          builder: (context) => AlertDialog(
-//                            title: Text('Starred Successfully!'),
-//                            actions: <Widget>[
-//                              FlatButton(
-//                                child: Icon(
-//                                  Icons.check,
-//                                ),
-//                                onPressed: () {
-//                                  Navigator.pop(context);
-////                                Navigator.pushNamed(
-////                                    context, HomeScreen.routeName);
-//                                },
-//                              )
-//                            ],
-//                          ),
-//                        );
-//                      }
-                      //
-//                      if (loadedStory.isStarred = false) {
-//                        showDialog(
-//                          context: context,
-//                          builder: (context) => AlertDialog(
-//                            title: Text('UnStarred!'),
-//                            actions: <Widget>[
-//                              FlatButton(
-//                                child: Icon(
-//                                  Icons.check,
-//                                ),
-//                                onPressed: () {
-////                                  Navigator.pop(context);
-//                                  Navigator.pushNamed(
-//                                      context, HomeScreen.routeName);
-//                                },
-//                              )
-//                            ],
-//                          ),
-//                        );
-//                      }
                     },
                   ),
                 ],
@@ -140,7 +98,18 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
               child: Text(
                 loadedStory.title,
                 style: TextStyle(
-                  fontSize: 30.0,
+                  fontFamily: 'Satisfy',
+//                  - family: Caveat
+//                - family: Great Vibes
+//                - family: Pacifico
+//                - family: Satisfy
+//                - family: Yellowtail
+//                - family: Dosis
+//                - family: Kosugi Maru
+//                - family: Source Sans Pro
+
+                  fontSize: 35.0,
+                  letterSpacing: 5,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -152,7 +121,8 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
                 loadedStory.storyNote,
 //                '$note + $key',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontFamily: 'Kosugi Maru',
+                  fontSize: 25.0,
                 ),
               ),
             ),

@@ -10,7 +10,6 @@ import './screens/StoryDetail.dart';
 import './screens/auth_screen.dart';
 import './screens/starred.dart';
 import './provider/auth.dart';
-import './tests/ta.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (context, auth, _) => MaterialApp(
-          title: 'MyDiary2',
+          title: 'MyDiary',
           theme: ThemeData(
             primarySwatch: Colors.deepOrange,
             accentColor: Colors.teal,
@@ -57,3 +56,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//auth.isAuth
+//? HomeScreen()
+//    : FutureBuilder(
+//future: auth.tryAutoLogin(),
+//builder: (context, authResultSnapshot) =>
+//authResultSnapshot.connectionState ==
+//ConnectionState.waiting
+//? SplashScreen()
+//    : AuthScreen(),
+//),

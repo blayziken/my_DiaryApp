@@ -5,6 +5,7 @@ import 'package:my_DiaryApp/screens/homeScreen.dart';
 import '../provider/story_provider.dart';
 import '../provider/story.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import '../widgets/loading_indicator.dart';
 
 class AddStory extends StatefulWidget {
   @override
@@ -138,11 +139,14 @@ class _AddStoryState extends State<AddStory> {
       ),
 
       body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.orange,
-              ),
-            )
+          ? BallPulseIndicator()
+
+//          Center(
+//              child: CircularProgressIndicator(
+//                backgroundColor: Colors.orange,
+//              ),
+//            )
+
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +161,7 @@ class _AddStoryState extends State<AddStory> {
                         child: ListView(
                           children: <Widget>[
                             TextFormField(
-                              maxLength: 25,
+                              maxLength: 30,
                               decoration: InputDecoration(
                                 labelText: 'Story Title',
                               ),

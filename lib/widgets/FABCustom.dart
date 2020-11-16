@@ -180,9 +180,8 @@ class _CustomFABState extends State<CustomFAB>
                       height: 50,
                       width: 50,
                       onClick: () {
-//                        Provider.of<Auth>(context, listen: false).logout();
-                        Provider.of<Stories>(context, listen: false)
-                            .printItems();
+                        Navigator.of(context).pushReplacementNamed('/');
+                        Provider.of<Auth>(context, listen: false).logout();
                       },
                     ),
                   ),

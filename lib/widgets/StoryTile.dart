@@ -56,15 +56,17 @@ class StoryTile extends StatelessWidget {
                   Text(
                     story.title,
                     style: TextStyle(
-                      color: Colors.black,
+//                      fontFamily: 'Tw Cent',
+//                      color: Colors.black,
                       fontSize: 21.0,
-//                      letterSpacing: 3.0,
+                      letterSpacing: 3.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     storyNoteClipped1,
                     style: TextStyle(
+//                      fontFamily: 'Amelian',
                       color: Colors.black,
                       fontStyle: FontStyle.italic,
                       fontSize: 18.0,
